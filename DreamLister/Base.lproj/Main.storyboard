@@ -233,8 +233,8 @@
                                     <action selector="savePressed:" destination="rKq-lg-x8f" eventType="touchUpInside" id="z2D-cc-2Nr"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Store" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vh5-Ci-WeN">
-                                <rect key="frame" x="89" y="241" width="142" height="35"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Select Store" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vh5-Ci-WeN">
+                                <rect key="frame" x="89" y="267" width="142" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="W2q-Td-cyN"/>
                                     <constraint firstAttribute="width" constant="142" id="xdn-fc-k8o"/>
@@ -243,9 +243,23 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xQf-8C-Vbo">
+                                <rect key="frame" x="24" y="243" width="272" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="MuT-oE-WTI"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Art"/>
+                                    <segment title="Home"/>
+                                    <segment title="Car"/>
+                                    <segment title="Hardware"/>
+                                </segments>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="xQf-8C-Vbo" firstAttribute="top" secondItem="mTD-Np-Gkj" secondAttribute="bottom" constant="1" id="2ri-GH-suH"/>
                             <constraint firstItem="me2-UE-Bkv" firstAttribute="leading" secondItem="9K3-Uq-ASI" secondAttribute="leadingMargin" id="3C9-qu-WPq"/>
                             <constraint firstItem="k9e-rj-daQ" firstAttribute="top" secondItem="lON-uB-tZU" secondAttribute="bottom" constant="8" id="8Vg-NV-sun"/>
                             <constraint firstItem="mTD-Np-Gkj" firstAttribute="top" secondItem="BgE-Og-bpX" secondAttribute="bottom" constant="10" id="95n-iL-wt3"/>
@@ -255,6 +269,7 @@
                             <constraint firstItem="k9e-rj-daQ" firstAttribute="leading" secondItem="9K3-Uq-ASI" secondAttribute="leading" id="LKn-gY-kfC"/>
                             <constraint firstItem="GDT-S5-Qoj" firstAttribute="leading" secondItem="9K3-Uq-ASI" secondAttribute="leadingMargin" id="PCH-Yg-6SV"/>
                             <constraint firstItem="dlv-fs-1Y4" firstAttribute="trailing" secondItem="9K3-Uq-ASI" secondAttribute="trailingMargin" id="UPU-FI-623"/>
+                            <constraint firstItem="xQf-8C-Vbo" firstAttribute="leading" secondItem="9K3-Uq-ASI" secondAttribute="leadingMargin" constant="8" id="W4o-N2-XFW"/>
                             <constraint firstItem="vYC-BW-85q" firstAttribute="centerX" secondItem="k9e-rj-daQ" secondAttribute="centerX" id="WRG-Cz-4C4"/>
                             <constraint firstAttribute="trailing" secondItem="mTD-Np-Gkj" secondAttribute="trailing" id="YBl-r7-FJd"/>
                             <constraint firstItem="mTD-Np-Gkj" firstAttribute="leading" secondItem="9K3-Uq-ASI" secondAttribute="leading" id="YPb-de-30y"/>
@@ -265,6 +280,7 @@
                             <constraint firstItem="vYC-BW-85q" firstAttribute="centerY" secondItem="k9e-rj-daQ" secondAttribute="centerY" id="k0V-tf-EbA"/>
                             <constraint firstItem="me2-UE-Bkv" firstAttribute="trailing" secondItem="9K3-Uq-ASI" secondAttribute="trailingMargin" id="kgE-6N-398"/>
                             <constraint firstItem="BgE-Og-bpX" firstAttribute="top" secondItem="dlv-fs-1Y4" secondAttribute="bottom" constant="10" id="oax-wM-fZA"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xQf-8C-Vbo" secondAttribute="trailing" constant="8" id="toj-5b-O3O"/>
                             <constraint firstItem="eEb-EK-Gpz" firstAttribute="top" secondItem="me2-UE-Bkv" secondAttribute="bottom" constant="20" id="vkd-BR-FTV"/>
                             <constraint firstItem="Vh5-Ci-WeN" firstAttribute="centerX" secondItem="9K3-Uq-ASI" secondAttribute="centerX" id="yFi-ME-yxj"/>
                         </constraints>
@@ -283,11 +299,12 @@
                         <outlet property="storePicker" destination="GDT-S5-Qoj" id="LfL-8j-4c3"/>
                         <outlet property="thumbImg" destination="k9e-rj-daQ" id="3Sq-Yg-fdn"/>
                         <outlet property="titleView" destination="dlv-fs-1Y4" id="YVe-cx-XG6"/>
+                        <outlet property="typeSegment" destination="xQf-8C-Vbo" id="7Ek-lW-YWJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bT2-vH-Vn7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1872.8" y="777.66116941529242"/>
+            <point key="canvasLocation" x="1871.25" y="777.46478873239437"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="R8D-bK-lPM">

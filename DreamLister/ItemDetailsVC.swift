@@ -11,6 +11,8 @@ import CoreData
 
 class ItemDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
 
+  @IBOutlet weak var typeSegment: UISegmentedControl!
+  
   @IBOutlet weak var storePicker: UIPickerView!
   @IBOutlet weak var titleView: CustomTextField!
   @IBOutlet weak var priceField: CustomTextField!
@@ -18,6 +20,8 @@ class ItemDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDeleg
   
   @IBOutlet weak var thumbImg: UIImageView!
 
+  
+  
   
   var stores  = [Store]()
   var itemToEdit: Item?
@@ -106,17 +110,24 @@ class ItemDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDeleg
     
     let picture = Image(context: context)
     picture.image = thumbImg.image
-   
+    
+    let itemType = ItemType(context: context)
+
+    let type : [String] = ["Art", "Home", "Car", "Hardware"]
+    
+    itemType.type = type[self.typeSegment.selectedSegmentIndex]
+    
+    
     
     if itemToEdit == nil {
       item = Item(context: context)
     } else {
       item = itemToEdit
     }
-    ad.saveContext()
+    
 
     item.toImage = picture
-    
+    item.toItemType = itemType
     
     if let title = titleView.text {
       item.title = title
@@ -152,9 +163,15 @@ class ItemDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDeleg
       titleView.text = item.title
       priceField.text = "\(item.price)"
       detailsField.text = item.details
+      let dict : [String : Int] = ["Art" : 0, "Home" : 1, "Car": 2, "Hardware": 3]
       
       thumbImg.image = item.toImage?.image as? UIImage
+      print("\(dict["Art"])")
       
+      
+      
+      
+     
       
       if let store = item.toStore {
         var index = 0
@@ -168,6 +185,16 @@ class ItemDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDeleg
           index += 1
         } while (index < stores.count)
       }
+      
+      guard let key: String = item.toItemType?.type else {
+        return
+      }
+      
+      guard let val = dict[key] else {
+        return
+      }
+      typeSegment.selectedSegmentIndex = val
+      
       
     }
   }

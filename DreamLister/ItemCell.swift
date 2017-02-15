@@ -9,10 +9,9 @@
 import UIKit
 
 class ItemCell: UITableViewCell {
-  @IBOutlet weak var thump: UIImageView!
-
-  @IBOutlet weak var title: UILabel!
   
+  @IBOutlet weak var thump: UIImageView!
+  @IBOutlet weak var title: UILabel!
   @IBOutlet weak var details: UILabel!
   @IBOutlet weak var price: UILabel!
   
@@ -21,6 +20,7 @@ class ItemCell: UITableViewCell {
     title.text = item.title
     price.text = "$\(item.price)"
     details.text = item.details
+    thump.image = item.toImage?.image as? UIImage
   }
   
 

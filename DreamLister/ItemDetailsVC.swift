@@ -15,9 +15,16 @@ class ItemDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDeleg
   @IBOutlet weak var titleView: CustomTextField!
   @IBOutlet weak var priceField: CustomTextField!
   @IBOutlet weak var detailsField: CustomTextField!
+  
+  @IBOutlet weak var thumbImg: UIImageView!
+
+  
   var stores  = [Store]()
   var itemToEdit: Item?
+ 
   var imagePicker: UIImagePickerController!
+  
+  
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +36,10 @@ class ItemDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDeleg
       
       storePicker.delegate = self
       storePicker.dataSource = self
+     
       imagePicker = UIImagePickerController()
       imagePicker.delegate = self
+      
       /*
       let store = Store(context : context)
       store.name = "Best Buy"
@@ -95,11 +104,18 @@ class ItemDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDeleg
   @IBAction func savePressed(_ sender: UIButton) {
     let item: Item!
     
+    let picture = Image(context: context)
+    picture.image = thumbImg.image
+   
+    
     if itemToEdit == nil {
       item = Item(context: context)
     } else {
       item = itemToEdit
     }
+    ad.saveContext()
+
+    item.toImage = picture
     
     
     if let title = titleView.text {
@@ -137,6 +153,8 @@ class ItemDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDeleg
       priceField.text = "\(item.price)"
       detailsField.text = item.details
       
+      thumbImg.image = item.toImage?.image as? UIImage
+      
       
       if let store = item.toStore {
         var index = 0
@@ -153,4 +171,19 @@ class ItemDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDeleg
       
     }
   }
+  
+  
+  @IBAction func addImage(_ sender: UIButton) {
+    present(imagePicker, animated: true, completion: nil)
+    
+  }
+  
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    if let img = info[UIImagePickerControllerOriginalImage] as? UIImage {
+      thumbImg.image = img
+    }
+    imagePicker.dismiss(animated: true, completion: nil)
+  }
+  
+  
 }

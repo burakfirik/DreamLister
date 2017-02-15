@@ -9,13 +9,16 @@
 import UIKit
 import CoreData
 
-class ItemDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
+class ItemDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
 
   @IBOutlet weak var storePicker: UIPickerView!
   @IBOutlet weak var titleView: CustomTextField!
   @IBOutlet weak var priceField: CustomTextField!
   @IBOutlet weak var detailsField: CustomTextField!
   var stores  = [Store]()
+  var itemToEdit: Item?
+  var imagePicker: UIImagePickerController!
+  
     override func viewDidLoad() {
         super.viewDidLoad()
       
@@ -26,6 +29,8 @@ class ItemDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDeleg
       
       storePicker.delegate = self
       storePicker.dataSource = self
+      imagePicker = UIImagePickerController()
+      imagePicker.delegate = self
       /*
       let store = Store(context : context)
       store.name = "Best Buy"
@@ -49,6 +54,10 @@ class ItemDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDeleg
     */
       
       getStores()
+      
+      if itemToEdit != nil {
+        loadItemData()
+      }
       
         // Do any additional setup after loading the view.
     }
@@ -84,7 +93,14 @@ class ItemDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDeleg
   }
 
   @IBAction func savePressed(_ sender: UIButton) {
-    let item = Item(context: context)
+    let item: Item!
+    
+    if itemToEdit == nil {
+      item = Item(context: context)
+    } else {
+      item = itemToEdit
+    }
+    
     
     if let title = titleView.text {
       item.title = title
@@ -100,5 +116,41 @@ class ItemDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDeleg
     ad.saveContext()
     _ = navigationController?.popViewController(animated: true)
     
+  }
+  
+  
+  
+  @IBAction func deletePressed(_ sender: UIBarButtonItem) {
+    
+    if itemToEdit != nil {
+      context.delete(itemToEdit!)
+      ad.saveContext()
+    }
+    _ = navigationController?.popViewController(animated: true)
+    
+  }
+  
+  
+  func loadItemData() {
+    if let item = itemToEdit {
+      titleView.text = item.title
+      priceField.text = "\(item.price)"
+      detailsField.text = item.details
+      
+      
+      if let store = item.toStore {
+        var index = 0
+        
+        repeat {
+          let s = stores[index]
+          if (s.name == store.name) {
+            storePicker.selectRow(index, inComponent: 0, animated: false)
+            break
+          }
+          index += 1
+        } while (index < stores.count)
+      }
+      
+    }
   }
 }

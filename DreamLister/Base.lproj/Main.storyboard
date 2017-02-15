@@ -41,7 +41,7 @@
                                 <rect key="frame" x="16" y="132" width="288" height="436"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ItemCell" rowHeight="151" id="Ze8-41-eim" customClass="ItemCell" customModule="DreamLister" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ItemCell" rowHeight="151" id="Ze8-41-eim" customClass="ItemCell" customModule="DreamLister" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="288" height="151"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ze8-41-eim" id="lOw-OZ-zhy">
@@ -266,6 +266,9 @@
                     <navigationItem key="navigationItem" title="Add/Edit" id="3SO-rg-htf">
                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="s8I-FI-1Fi">
                             <color key="tintColor" red="1" green="0.1609238969" blue="0.05394235981" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="deletePressed:" destination="rKq-lg-x8f" id="L8q-Kd-rxD"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
